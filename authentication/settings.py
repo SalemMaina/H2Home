@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'accounts',
+    'IOT',
+    'Vendors',
 
 
     'rest_framework',

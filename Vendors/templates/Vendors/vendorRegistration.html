@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Vendor Registration</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" href="../assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+        WebFont.load({
+            google: { families: ["Public Sans:300,400,500,600,700"] },
+            custom: {
+                families: [
+                    "Font Awesome 5 Solid",
+                    "Font Awesome 5 Regular",
+                    "Font Awesome 5 Brands",
+                    "simple-line-icons",
+                ],
+                urls: ["../assets/css/fonts.min.css"],
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            },
+        });
+    </script>
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+    
+        function showPosition(position) {
+            let lat = position.coords.latitude;
+            let lon = position.coords.longitude;
+            fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("location").value = data.display_name;
+                })
+                .catch(() => {
+                    document.getElementById("location").value = `Lat: ${lat}, Lon: ${lon}`;
+                });
+        }
+    
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("Location access denied by user.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("Request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+    </script>
+    
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="../assets/css/kaiadmin.min.css" />
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+        }
+        .card {
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .image-preview {
+            width: 100%;
+            height: 200px;
+            border: 1px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: #f5f5f5;
+        }
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header text-center">
+                <h4 class="card-title">Vendor Registration</h4>
+            </div>
+            <div class="card-body">
+                <form>
+                    
+                    <!-- Business Details -->
+                    <h5 class="mb-3">Business Details</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="businessName" class="form-label">Business Name</label>
+                            <input type="text" class="form-control" id="businessName" placeholder="Enter Business Name" required />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="openingTime" class="form-label">Opening Time</label>
+                            <input type="time" class="form-control" id="openingTime" required />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="closingTime" class="form-label">Closing Time</label>
+                            <input type="time" class="form-control" id="closingTime" required />
+                        </div>
+                    </div>
+
+                    <!-- Location & Description -->
+                    <h5 class="mb-3">Location & Description</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="location" class="form-label">Location</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="location" placeholder="Click to get location" onclick="getLocation()" required readonly />
+                                <button class="btn btn-outline-primary" type="button" onclick="getLocation()">📍</button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label for="website" class="form-label">Website (Optional)</label>
+                            <input type="url" class="form-control" id="website" placeholder="Enter Website URL" />
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" rows="3" placeholder="Describe your shop"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Pricing & Contact -->
+                    <h5 class="mb-3">Pricing & Contact</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="pricePerLitre" class="form-label">Price Per Litre (in USD)</label>
+                            <input type="number" class="form-control" id="pricePerLitre" placeholder="Enter Price" required />
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <h5 class="mb-3">Contact Information</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter Email Address" required />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="phoneNumber" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter Phone Number" required />
+                        </div>
+                    </div>
+
+                    <!-- Image Upload & Preview -->
+                    <h5 class="mb-3">Business Image</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="image" class="form-label">Upload Image</label>
+                            <input type="file" class="form-control" id="image" accept="image/*" onchange="previewImage(event)" required />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="image-preview" id="imagePreview">
+                                <span>No image selected</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 mt-3">Register</button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <small>Already registered? <a href="vendor_dashboard.html">Go to Dashboard</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Files -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/plugins.min.js"></script>
+    <script src="../assets/js/kaiadmin.min.js"></script>
+
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const imagePreview = document.getElementById("imagePreview");
+                imagePreview.innerHTML = '<img src="' + reader.result + '" />';
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+
+</body>
+</html>

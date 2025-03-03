@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Edit</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" href="../assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+        WebFont.load({
+            google: { families: ["Public Sans:300,400,500,600,700"] },
+            custom: {
+                families: [
+                    "Font Awesome 5 Solid",
+                    "Font Awesome 5 Regular",
+                    "Font Awesome 5 Brands",
+                    "simple-line-icons",
+                ],
+                urls: ["../assets/css/fonts.min.css"],
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            },
+        });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="../assets/css/kaiadmin.min.css" />
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2 class="text-center">Edit Profile</h2>
+        <div class="card">
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="businessName" class="form-label">Business Name</label>
+                        <input type="text" class="form-control" id="businessName" value="AquaPure">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="openingTime" class="form-label">Opening Time</label>
+                            <input type="time" class="form-control" id="openingTime" value="08:00">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="closingTime" class="form-label">Closing Time</label>
+                            <input type="time" class="form-control" id="closingTime" value="20:00">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" class="form-control" id="location" value="123 Main Street, City">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Shop Description</label>
+                        <textarea class="form-control" id="description">We provide the cleanest water in town.</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price per Liter</label>
+                        <input type="number" class="form-control" id="price" value="20">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" value="vendor@example.com">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" value="+254712345678">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="profileImage" class="form-label">Profile Image</label>
+                        <input type="file" class="form-control" id="profileImage" accept="image/*" onchange="previewImage(event)">
+                        <img id="imagePreview" src="default.jpg" class="mt-2 rounded-circle" width="100" style="display: none;">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a href="profile.html" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            var image = document.getElementById('imagePreview');
+            image.src = URL.createObjectURL(event.target.files[0]);
+            image.style.display = "block";
+        }
+    </script>
+
+    <!-- JS Files -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/plugins.min.js"></script>
+    <script src="../assets/js/kaiadmin.min.js"></script>
+</body>
+</html>
