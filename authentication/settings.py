@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'accounts',
     'IOT',
     'Vendors',
+    'static',
+    'tracking',
 
 
     'rest_framework',
@@ -128,13 +130,10 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",  # For Django 3.1+ (if using pathlib)
-]
+STATIC_URL = '/static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
