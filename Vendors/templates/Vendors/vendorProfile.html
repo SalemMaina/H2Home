@@ -1,0 +1,51 @@
+<!-- Vendor Profile Page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Profile</title>
+    <link rel="stylesheet" href="../../../static/assets/css/bootstrap.min.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="mb-4">Vendor Profile</h2>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <img id="profileImage" src="../../../static/assets/img/default.jpg" class="img-fluid rounded" alt="Vendor Image">
+                    </div>
+                    <div class="col-md-8">
+                        <h4 id="businessName">Business Name</h4>
+                        <p><strong>Opening Time:</strong> <span id="openingTime">8:00 AM</span></p>
+                        <p><strong>Closing Time:</strong> <span id="closingTime">8:00 PM</span></p>
+                        <p><strong>Location:</strong> <span id="location">Unknown</span></p>
+                        <div id="map" style="height: 200px; width: 100%;"></div>
+                        <p><strong>Description:</strong> <span id="description">N/A</span></p>
+                        <p><strong>Price per Litre:</strong> <span id="price">KES 5.00</span></p>
+                        <p><strong>Email:</strong> <span id="email">vendor@example.com</span></p>
+                        <p><strong>Phone:</strong> <span id="phone">+123456789</span></p>
+                        <a href="edit.html" class="btn btn-primary">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function initMap() {
+            var lat = -1.286389; // Default latitude
+            var lng = 36.817223; // Default longitude
+            var map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 15,
+                center: { lat: lat, lng: lng },
+            });
+            new google.maps.Marker({
+                position: { lat: lat, lng: lng },
+                map: map,
+            });
+        }
+    </script>
+</body>
+</html>

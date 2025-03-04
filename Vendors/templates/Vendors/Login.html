@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Login</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" href="../../../static/assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script src="../../../static/assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+        WebFont.load({
+            google: { families: ["Public Sans:300,400,500,600,700"] },
+            custom: {
+                families: [
+                    "Font Awesome 5 Solid",
+                    "Font Awesome 5 Regular",
+                    "Font Awesome 5 Brands",
+                    "simple-line-icons",
+                ],
+                urls: ["../assets/css/fonts.min.css"],
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            },
+        });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../../../static/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../static/assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="../../../static/assets/css/kaiadmin.min.css" />
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row justify-content-center align-items-center min-vh-100">
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h4 class="card-title">Login</h4>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="email2" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email2" placeholder="Enter Email" />
+                                <small id="emailHelp2" class="form-text text-muted">
+                                    We'll never share your email with anyone else.
+                                </small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Password" />
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+                                <label class="form-check-label" for="exampleCheck1">Remember me</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                        </form>
+                        <div class="text-center mt-3">
+                            <small>Dont have an account? <a href="signup.html">Register here</a></small>
+                            <small>Forgot your Password? <a href="login.html">Click here</a></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Files -->
+    <script src="../../../static/assets/js/jquery.min.js"></script>
+    <script src="../../../static/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../static/assets/js/plugins.min.js"></script>
+    <script src="../../../static/assets/js/kaiadmin.min.js"></script>
+</body>
+</html>
