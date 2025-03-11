@@ -1,10 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth.models import Group, User
-from .models import Profile
+from .models import CustomerProfile
 from rest_framework import permissions, viewsets
 
 from .serializers import GroupSerializer, UserSerializer, ProfileSerializer
-
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -14,6 +13,10 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def perform_create(self, serializer):
+        email = serializer.validated_data.get("email", "")
+        username = email.split('@')[0]  # Extract first part of email
+        serializer.save(username=username)
 
 class GroupViewSet(viewsets.ModelViewSet):
     """
@@ -24,7 +27,6 @@ class GroupViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 class ProfileViewSet(viewsets.ModelViewSet):
-
-    queryset = Profile.objects.all()
+    queryset = CustomerProfile.objects.all()
     serializer_class = ProfileSerializer
-    permission_classes =[permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
