@@ -17,4 +17,4 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CustomerProfile
-        fields = ['url', 'user', 'name',  'user_type', 'image', 'bio', 'contact_number']
+        fields = ['url', 'user', 'name', 'location' ,'contact_number'] 
