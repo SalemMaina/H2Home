@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import Group, User
-from .models import Profile
+from .models import CustomerProfile
 from rest_framework import permissions, viewsets
 
 from .serializers import GroupSerializer, UserSerializer, ProfileSerializer
@@ -31,6 +31,6 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 class ProfileViewSet(viewsets.ModelViewSet):
 
-    queryset = Profile.objects.all()
+    queryset = CustomerProfile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes =[permissions.IsAuthenticated]

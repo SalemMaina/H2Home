@@ -1,7 +1,7 @@
 from django.dispatch import receiver
 from allauth.account.signals import user_signed_up
-from .models import Profile
+from .models import CustomerProfile
 
 @receiver(user_signed_up)
 def create_profile(user, **kwargs):
-    Profile.objects.create(user=user, name=user.username)
+    CustomerProfile.objects.create(user=user, name=user.username)

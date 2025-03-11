@@ -1,5 +1,5 @@
 from django.contrib.auth.models import Group, User
-from .models import Profile 
+from .models import CustomerProfile 
 from rest_framework import serializers
 
 
@@ -16,5 +16,5 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Profile
+        model = CustomerProfile
         fields = ['url', 'user', 'name',  'user_type', 'image', 'bio', 'contact_number']
