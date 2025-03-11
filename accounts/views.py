@@ -6,13 +6,19 @@ from rest_framework import permissions, viewsets
 from .serializers import GroupSerializer, UserSerializer, ProfileSerializer
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'password']
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        email = validated_data.get('email', '')
+        username = email.split('@')[0]  # Extract username from email
+        validated_data['username'] = username  # Set it as the username
+
+        user = User.objects.create_user(**validated_data)
+        return user
 
 
 class GroupViewSet(viewsets.ModelViewSet):

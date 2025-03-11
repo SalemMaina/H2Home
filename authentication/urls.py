@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from accounts import views
+from Vendors import urls
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
@@ -25,8 +26,10 @@ router.register(r'groups', views.GroupViewSet)
 router.register(r'profiles', views.ProfileViewSet)
 
 urlpatterns = [
+
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
+    path('', include('Vendors.urls')),
     #path('',include, 'accounts.urls'),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls'))

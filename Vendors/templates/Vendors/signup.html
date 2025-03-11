@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    {% load static %}
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Signup</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
@@ -79,7 +82,7 @@
                             <button type="submit" class="btn btn-primary w-100">Register</button>
                         </form>
                         <div class="text-center mt-3">
-                            <small>Already have an account? <a href="login.html">Login here</a></small>
+                            <small>Already have an account? <a href="{% url 'login' %}">Login here</a></small>
                         </div>
                     </div>
                 </div>

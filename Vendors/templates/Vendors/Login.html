@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Login</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     <link rel="icon" href="../../../static/assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+
 
     <!-- Fonts and icons -->
     <script src="../../../static/assets/js/plugin/webfont/webfont.min.js"></script>
@@ -78,8 +81,8 @@
                             <button type="submit" class="btn btn-primary w-100">Login</button>
                         </form>
                         <div class="text-center mt-3">
-                            <small>Dont have an account? <a href="signup.html">Register here</a></small>
-                            <small>Forgot your Password? <a href="login.html">Click here</a></small>
+                            <small>Dont have an account? <a href="{% url 'register' %}">Register here</a></small>
+                            <small>Forgot your Password? <a href="{% url 'register' %}">Click here</a></small>
                         </div>
                     </div>
                 </div>
