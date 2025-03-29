@@ -9,6 +9,7 @@ class Vendor(models.Model):
     location = models.CharField(max_length=255)  # Can be changed to GPS coordinates
     description = models.TextField()
     price_per_litre = models.DecimalField(max_digits=6, decimal_places=2)
+    website = models.URLField(blank=True, null=True ) 
     email = models.EmailField()
     phone_number = models.CharField(max_length=15)
     image = models.ImageField(upload_to='vendor_images/', blank=True, null=True)
@@ -16,3 +17,10 @@ class Vendor(models.Model):
 
     def __str__(self):
         return self.business_name
+
+class VendorVisit(models.Model):
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name="visits")
+    visit_count = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.vendor.business_name} - {self.visit_count} visits"

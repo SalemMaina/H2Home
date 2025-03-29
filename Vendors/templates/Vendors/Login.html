@@ -62,24 +62,32 @@
                         <h4 class="card-title">Login</h4>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form method="POST">
+                            {% csrf_token %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                                {% endfor %}
+                            {% endif %}
+                            
                             <div class="mb-3">
-                                <label for="email2" class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="email2" placeholder="Enter Email" />
-                                <small id="emailHelp2" class="form-text text-muted">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email" required />
+                                <small id="emailHelp" class="form-text text-muted">
                                     We'll never share your email with anyone else.
                                 </small>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="Password" />
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required />
                             </div>
                             <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                                <label class="form-check-label" for="exampleCheck1">Remember me</label>
+                                <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe" />
+                                <label class="form-check-label" for="rememberMe">Remember me</label>
                             </div>
                             <button type="submit" class="btn btn-primary w-100">Login</button>
                         </form>
+                        
                         <div class="text-center mt-3">
                             <small>Dont have an account? <a href="{% url 'register' %}">Register here</a></small>
                             <small>Forgot your Password? <a href="{% url 'register' %}">Click here</a></small>
