@@ -111,74 +111,122 @@
                 <h4 class="card-title">Vendor Registration</h4>
             </div>
             <div class="card-body">
-                <form>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
                     
                     <!-- Business Details -->
                     <h5 class="mb-3">Business Details</h5>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="businessName" class="form-label">Business Name</label>
-                            <input type="text" class="form-control" id="businessName" placeholder="Enter Business Name" required />
+                            <input type="text" class="form-control" id="businessName" 
+                                   name="business_name" placeholder="Enter Business Name" 
+                                   value="{{ form.business_name.value|default:'' }}" required />
+                            {% if form.business_name.errors %}
+                                <div class="text-danger small">{{ form.business_name.errors }}</div>
+                            {% endif %}
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="openingTime" class="form-label">Opening Time</label>
-                            <input type="time" class="form-control" id="openingTime" required />
+                            <input type="time" class="form-control" id="openingTime" 
+                                   name="opening_time" value="{{ form.opening_time.value|default:'' }}" required />
+                            {% if form.opening_time.errors %}
+                                <div class="text-danger small">{{ form.opening_time.errors }}</div>
+                            {% endif %}
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="closingTime" class="form-label">Closing Time</label>
-                            <input type="time" class="form-control" id="closingTime" required />
+                            <input type="time" class="form-control" id="closingTime" 
+                                   name="closing_time" value="{{ form.closing_time.value|default:'' }}" required />
+                            {% if form.closing_time.errors %}
+                                <div class="text-danger small">{{ form.closing_time.errors }}</div>
+                            {% endif %}
                         </div>
                     </div>
-
+                
                     <!-- Location & Description -->
                     <h5 class="mb-3">Location & Description</h5>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="location" class="form-label">Location</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="location" placeholder="Click to get location" onclick="getLocation()" required readonly />
+                                <input type="text" class="form-control" id="location" 
+                                       name="location" placeholder="Click to get location" 
+                                       value="{{ form.location.value|default:'' }}"
+                                       onclick="getLocation()" required readonly />
                                 <button class="btn btn-outline-primary" type="button" onclick="getLocation()">📍</button>
                             </div>
+                            {% if form.location.errors %}
+                                <div class="text-danger small">{{ form.location.errors }}</div>
+                            {% endif %}
                         </div>
                         
                         <div class="col-md-6 mb-3">
                             <label for="website" class="form-label">Website (Optional)</label>
-                            <input type="url" class="form-control" id="website" placeholder="Enter Website URL" />
+                            <input type="url" class="form-control" id="website" 
+                                   name="website" placeholder="Enter Website URL" 
+                                   value="{{ form.website.value|default:'' }}" />
+                            {% if form.website.errors %}
+                                <div class="text-danger small">{{ form.website.errors }}</div>
+                            {% endif %}
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" rows="3" placeholder="Describe your shop"></textarea>
+                            <textarea class="form-control" id="description" rows="3" 
+                                      name="description" placeholder="Describe your shop">{{ form.description.value|default:'' }}</textarea>
+                            {% if form.description.errors %}
+                                <div class="text-danger small">{{ form.description.errors }}</div>
+                            {% endif %}
                         </div>
                     </div>
-
+                
                     <!-- Pricing & Contact -->
                     <h5 class="mb-3">Pricing & Contact</h5>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="pricePerLitre" class="form-label">Price Per Litre (in USD)</label>
-                            <input type="number" class="form-control" id="pricePerLitre" placeholder="Enter Price" required />
+                            <input type="number" step="0.01" class="form-control" id="pricePerLitre" 
+                                   name="price_per_litre" placeholder="Enter Price" 
+                                   value="{{ form.price_per_litre.value|default:'' }}" required />
+                            {% if form.price_per_litre.errors %}
+                                <div class="text-danger small">{{ form.price_per_litre.errors }}</div>
+                            {% endif %}
                         </div>
                     </div>
-
+                
                     <!-- Contact Information -->
                     <h5 class="mb-3">Contact Information</h5>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter Email Address" required />
+                            <input type="email" class="form-control" id="email" 
+                                   name="email" placeholder="Enter Email Address" 
+                                   value="{{ form.email.value|default:'' }}" required />
+                            {% if form.email.errors %}
+                                <div class="text-danger small">{{ form.email.errors }}</div>
+                            {% endif %}
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="phoneNumber" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter Phone Number" required />
+                            <input type="tel" class="form-control" id="phoneNumber" 
+                                   name="phone_number" placeholder="Enter Phone Number" 
+                                   value="{{ form.phone_number.value|default:'' }}" required />
+                            {% if form.phone_number.errors %}
+                                <div class="text-danger small">{{ form.phone_number.errors }}</div>
+                            {% endif %}
                         </div>
                     </div>
-
+                
                     <!-- Image Upload & Preview -->
                     <h5 class="mb-3">Business Image</h5>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="image" class="form-label">Upload Image</label>
-                            <input type="file" class="form-control" id="image" accept="image/*" onchange="previewImage(event)" required />
+                            <input type="file" class="form-control" id="image" 
+                                   name="image" accept="image/*" onchange="previewImage(event)" required />
+                            {% if form.image.errors %}
+                                <div class="text-danger small">{{ form.image.errors }}</div>
+                            {% endif %}
                         </div>
                         <div class="col-md-6">
                             <div class="image-preview" id="imagePreview">
@@ -186,9 +234,11 @@
                             </div>
                         </div>
                     </div>
-
+                
                     <button type="submit" class="btn btn-primary w-100 mt-3">Register</button>
                 </form>
+                
+                
 
                 <div class="text-center mt-3">
                     <small>Already registered? <a href="vendor_dashboard.html">Go to Dashboard</a></small>

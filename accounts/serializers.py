@@ -18,3 +18,4 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CustomerProfile
         fields = ['url', 'user', 'name', 'location' ,'contact_number'] 
+
