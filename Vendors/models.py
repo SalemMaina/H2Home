@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+
 
 class Vendor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # Link to User model
@@ -21,6 +23,7 @@ class Vendor(models.Model):
 class VendorVisit(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name="visits")
     visit_count = models.IntegerField(default=0)
-
+    visit_time = models.DateTimeField(default=timezone.now)
+    
     def __str__(self):
         return f"{self.vendor.business_name} - {self.visit_count} visits"

@@ -54,44 +54,77 @@
 
 <body>
 
-    <div class="container">
-        <div class="row justify-content-center align-items-center min-vh-100">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4">
-                <div class="card">
-                    <div class="card-header text-center">
-                        <h4 class="card-title">Login</h4>
-                    </div>
-                    <div class="card-body">
-                        <form method="POST">
+                <div class="card shadow">
+                    <div class="card-body p-4">
+                        <h2 class="text-center mb-4">Vendor Login</h2>
+                        
+                        <form method="POST" novalidate>
                             {% csrf_token %}
+                            
+                            <!-- Messages -->
                             {% if messages %}
+                            <div class="mb-3">
                                 {% for message in messages %}
-                                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
                                 {% endfor %}
+                            </div>
                             {% endif %}
                             
+                            <!-- Email Field -->
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email Address</label>
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email" required />
-                                <small id="emailHelp" class="form-text text-muted">
-                                    We'll never share your email with anyone else.
-                                </small>
+                                <label for="email" class="form-label">Email or Username</label>
+                                <input type="text" 
+                                       class="form-control {% if messages and 'email' in message.tags %}is-invalid{% endif %}" 
+                                       name="email" 
+                                       id="email" 
+                                       value="{{ request.POST.email }}" 
+                                       required
+                                       autofocus>
+                                <div class="invalid-feedback">
+                                    Please enter a valid email or username
+                                </div>
                             </div>
+                            
+                            <!-- Password Field -->
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required />
+                                <input type="password" 
+                                       class="form-control {% if messages and 'password' in message.tags %}is-invalid{% endif %}" 
+                                       name="password" 
+                                       id="password" 
+                                       required>
+                                <div class="invalid-feedback">
+                                    Please enter your password
+                                </div>
+                                <small class="text-muted float-end">
+                                    <a>Forgot password?</a>
+                                </small>
                             </div>
+                            
+                            <!-- Remember Me -->
                             <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe" />
+                                <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
                                 <label class="form-check-label" for="rememberMe">Remember me</label>
                             </div>
-                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                            
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-primary w-100 py-2">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                            </button>
+                            
+                            <!-- Registration Link -->
+                            <div class="mt-3 text-center">
+                                <p class="mb-0">Don't have an account? 
+                                    <a href="{% url 'registration' %}">Register here</a>
+                                </p>
+                            </div>
                         </form>
-                        
-                        <div class="text-center mt-3">
-                            <small>Dont have an account? <a href="{% url 'register' %}">Register here</a></small>
-                            <small>Forgot your Password? <a href="{% url 'register' %}">Click here</a></small>
-                        </div>
                     </div>
                 </div>
             </div>
