@@ -22,8 +22,13 @@ from Vendors import urls
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
+<<<<<<< HEAD
 router.register(r'groups', views.GroupViewSet)  
+=======
+#router.register(r'groups', views.GroupViewSet)
+>>>>>>> 277beb3 (REST Api updates)
 router.register(r'profiles', views.ProfileViewSet)
+router.register(r'vendors', views.VendorViewSet)
 
 urlpatterns = [
 
