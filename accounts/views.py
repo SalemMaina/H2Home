@@ -15,7 +15,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    #permission_classes = [permissions.IsAuthenticated]
 
 @api_view(['POST'])
 def perform_create(self, serializer):
@@ -32,7 +32,7 @@ def perform_create(self, serializer):
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = CustomerProfile.objects.all()
     serializer_class = ProfileSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    #permission_classes = [permissions.IsAuthenticated]
 
 @api_view(['POST'])
 def create_profile(request):

@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+import sys
+from dotenv import load_dotenv
+from pathlib import Path
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,6 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-2*jk1*&vc2*6rgz%j4q1_j5zkpzjn*l=-ova#paj8&asi#!ymk'
+PAYSTACK_SECRET_KEY=os.getenv('PAYSTACK_SECRET_KEY')
+PAYSTACK_PUBLIC_KEY=os.getenv('PAYSTACK_PUBLIC_KEY')
+PAYSTACK_WEBHOOK_IP_WHITELIST = ['52.31.139.75', '52.49.173.169', '105.163.156.126']  # Paystack's official IPs
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,6 +40,9 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '4660-41-204-187-5.ngrok-free.app/',
     'b142-41-204-187-5.ngrok-free.app/',
+    'c380-41-204-187-5.ngrok-free.app/',
+    'http://c380-41-204-187-5.ngrok-free.app/',
+    '*',
 ]
 
 
@@ -48,12 +60,15 @@ INSTALLED_APPS = [
     'IOT',
     'Vendors',
     'tracking',
+    'Payments',
 
 
     'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',
     'corsheaders',
+
+    #'django-filters',
 
     'django.contrib.sites',
     'allauth',
@@ -114,15 +129,15 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    #{
+     #   'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    #},
+    #{
+     #   'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    #},
+    #{
+     #   'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    #},
 ]
 
 
@@ -152,3 +167,5 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT='uploads/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
