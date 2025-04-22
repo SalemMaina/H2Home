@@ -30,7 +30,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    #permission_classes = [permissions.IsAuthenticated]
 
 <<<<<<< HEAD
 =======
@@ -51,6 +51,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
     queryset = CustomerProfile.objects.all()
     serializer_class = ProfileSerializer
+<<<<<<< HEAD
 <<<<<<< HEAD
     permission_classes =[permissions.IsAuthenticated]
 
@@ -87,6 +88,9 @@ class ChangeCustomerVendorView(APIView):
             return Response({"error": "Vendor not found"}, status=status.HTTP_404_NOT_FOUND)
 =======
     permission_classes = [permissions.IsAuthenticated]
+=======
+    #permission_classes = [permissions.IsAuthenticated]
+>>>>>>> f026378 (Payments module in the backend)
 
 @api_view(['POST'])
 def create_profile(request):

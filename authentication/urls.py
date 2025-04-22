@@ -19,6 +19,9 @@ from django.urls import path, include
 from rest_framework import routers
 from accounts import views
 from Vendors import urls
+from Payments import urls
+from Payments.views import SubscriptionPlanViewSet
+from Payments import views as Payments
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
@@ -29,15 +32,20 @@ router.register(r'groups', views.GroupViewSet)
 >>>>>>> 277beb3 (REST Api updates)
 router.register(r'profiles', views.ProfileViewSet)
 router.register(r'vendors', views.VendorViewSet)
+router.register(r'plans',  Payments.SubscriptionPlanViewSet)
 
 urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('', include('Vendors.urls')),
+<<<<<<< HEAD
     path('iot/', include('IOT.urls')),
     path('device/', include('Device.urls')),
 
+=======
+    path('payments/', include('Payments.urls')),
+>>>>>>> f026378 (Payments module in the backend)
     #path('',include, 'accounts.urls'),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls'))

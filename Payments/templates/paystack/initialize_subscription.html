@@ -1,0 +1,13 @@
+<form method="post" action="{% url 'initialize_subscription' %}">
+    {% csrf_token %}
+    <label for="email">Email:</label>
+    <input type="email" name="email" required>
+    
+    <label for="plan_code">Plan:</label>
+    <select name="plan_code" required>
+        <option value="PLN_r85fejsgf2pbccj">Monthly (₦5000)</option>
+        <option value="PLN_r85fejsgf2pbccj">Yearly (₦50,000)</option>
+    </select>
+    
+    <button type="submit">Subscribe</button>
+</form>
