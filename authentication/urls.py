@@ -22,7 +22,7 @@ from Vendors import urls
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+router.register(r'groups', views.GroupViewSet)  
 router.register(r'profiles', views.ProfileViewSet)
 
 urlpatterns = [
@@ -30,7 +30,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('', include('Vendors.urls')),
-    path('', include('IOT.urls')),
+    path('iot/', include('IOT.urls')),
+    path('device/', include('Device.urls')),
 
     #path('',include, 'accounts.urls'),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
