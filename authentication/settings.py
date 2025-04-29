@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 import sys
+from dotenv import load_dotenv
 from pathlib import Path
 
 load_dotenv()
@@ -68,6 +69,7 @@ INSTALLED_APPS = [
     'IOT',
     'Vendors',
     'tracking',
+<<<<<<< HEAD
     'Device',
     'Payments',
 
