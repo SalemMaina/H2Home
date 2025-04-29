@@ -25,7 +25,6 @@ from Payments import views as Payments
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)  
 #router.register(r'groups', views.GroupViewSet)
 router.register(r'profiles', views.ProfileViewSet)
 router.register(r'vendors', views.VendorViewSet)
