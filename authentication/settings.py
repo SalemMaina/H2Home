@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 import sys
-from dotenv import load_dotenv
 from pathlib import Path
 
 load_dotenv()
@@ -35,7 +34,6 @@ PAYSTACK_WEBHOOK_IP_WHITELIST = ['52.31.139.75', '52.49.173.169', '105.163.156.1
 DEBUG = True
 
 ALLOWED_HOSTS = [
-<<<<<<< HEAD
     'e8bf-41-204-187-5.ngrok-free.app',
     'localhost',  # Keep your local development host
     '127.0.0.1',
@@ -44,19 +42,15 @@ ALLOWED_HOSTS = [
 # Add CSRF trusted origins
 CSRF_TRUSTED_ORIGINS = [
     'https://e8bf-41-204-187-5.ngrok-free.app',
-=======
     '52c8-41-204-187-5.ngrok-free.app',
     'localhost',
     '127.0.0.1',
     '4660-41-204-187-5.ngrok-free.app/',
     'b142-41-204-187-5.ngrok-free.app/',
-<<<<<<< HEAD
->>>>>>> 277beb3 (REST Api updates)
-=======
+
     'c380-41-204-187-5.ngrok-free.app/',
     'http://c380-41-204-187-5.ngrok-free.app/',
     '*',
->>>>>>> f026378 (Payments module in the backend)
 ]
 
 
@@ -74,11 +68,8 @@ INSTALLED_APPS = [
     'IOT',
     'Vendors',
     'tracking',
-<<<<<<< HEAD
     'Device',
-=======
     'Payments',
->>>>>>> f026378 (Payments module in the backend)
 
 
     'rest_framework',
