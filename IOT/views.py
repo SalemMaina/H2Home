@@ -4,28 +4,23 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import RandomNumber
 import json
 from django.shortcuts import render, redirect
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import RandomNumberSerializer
 
-@csrf_exempt  # Disable CSRF for simplicity (ensure to use proper security measures in production)
-def receive_number(request):
-    if request.method == "POST":
-        try:
-            data = json.loads(request.body)  # Parse JSON payload
-            number = data.get("number")
-            if number is not None and isinstance(number, int):  # Validate number
-                RandomNumber.objects.create(value=number)
-                return JsonResponse({"message": "Number received successfully"}, status=200)
-            else:
-                return JsonResponse({"error": "Invalid data"}, status=400)
-        except json.JSONDecodeError:
-            return JsonResponse({"error": "Invalid JSON"}, status=400)
-    return JsonResponse({"error": "Invalid request method"}, status=405)
 
-def number_list(request):
-    if request.method == "POST":
-        number = request.POST.get('number')
-        if number.isdigit():  # Ensure only numbers are stored
-            RandomNumber.objects.create(value=int(number))
-        return redirect('number_list')
+@api_view(['POST'])
+def receive_random_number(request):
+    serializer = RandomNumberSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()  # Save the number in the database
+        return Response({"message": "Number received", "data": serializer.data}, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    numbers = RandomNumber.objects.all().order_by('-created_at')  # Display numbers in reverse order
-    return render(request, 'numbers.html', {'numbers': numbers})
+
+@api_view(['GET'])
+def get_random_numbers(request):
+    numbers = RandomNumber.objects.all().order_by('-timestamp')
+    serializer = RandomNumberSerializer(numbers, many=True)
+    return Response(serializer.data)

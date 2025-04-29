@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>hzHone</title>
+    <title>H2Home</title>
     <meta
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
@@ -12,7 +12,7 @@
     <link
     
       rel="icon"
-      href= " ../../../static/assets/img/kaiadmin/favicon.icon"
+      href= " ../../../static/assets/img/logo1.png"
       type="image/x-icon"
     />
 
@@ -52,12 +52,23 @@
           <!-- Logo Header -->
           <div class="logo-header" data-background-color="dark">
             <a href="index.html" class="logo">
-              <img
-                src="../../../static/assets/img/kaiadmin/logo_light.svg"
+                <!-- <img
+                src="../../../static/assets/img/logo1.png"
                 alt="navbar brand"
                 class="navbar-brand"
-                height="20"
-              />
+                height="100"
+                /> -->
+              <h4 class="text-white
+                text-center
+                font-weight-bold
+                mb-0
+                d-flex
+                align-items-center
+                justify-content-center"
+                style="height: 100px"
+              >
+              H<sub>2</sub>Homee
+              </h4>
             </a>
             <div class="nav-toggle">
               <button class="btn btn-toggle toggle-sidebar">
@@ -98,7 +109,7 @@
             <div class="logo-header" data-background-color="dark">
               <a href="index.html" class="logo">
                 <img
-                  src="../../../static/assets/img/kaiadmin/logo_light.svg"
+                  src="../../../static/assets/img/logo1.png"
                   alt="navbar brand"
                   class="navbar-brand"
                   height="20"
@@ -414,6 +425,7 @@
                   </div>
                 </li>
 
+
                 <li class="nav-item topbar-user dropdown hidden-caret">
                   <a
                     class="dropdown-toggle profile-pic"
@@ -430,7 +442,7 @@
                     </div>
                     <span class="profile-username">
                       <span class="op-7">Hi,</span>
-                      <span class="fw-bold">Hizrian</span>
+                      <span class="fw-bold">{{ user.username }}</span>
                     </span>
                   </a>
                   <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -445,10 +457,10 @@
                             />
                           </div>
                           <div class="u-text">
-                            <h4>Hizrian</h4>
-                            <p class="text-muted">hello@example.com</p>
+                            <h4>{{user.username}}</h4>
+                            <p class="text-muted">{{user.email}}</p>
                             <a
-                              href="profile.html"
+                              href="{% url 'profile' %}"
                               class="btn btn-xs btn-secondary btn-sm"
                               >View Profile</a
                             >
@@ -457,7 +469,7 @@
                       </li>
                       <li>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">My Profile</a>
+                        <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>
                         <a class="dropdown-item" href="#">My Balance</a>
                         <a class="dropdown-item" href="#">Inbox</a>
                         <div class="dropdown-divider"></div>
@@ -481,7 +493,7 @@
             >
               <div>
                 <h3 class="fw-bold mb-3">Dashboard</h3>
-                <h6 class="op-7 mb-2">Welcome, Vannesa</h6>
+                <h6 class="op-7 mb-2">Hello {{user.username}}</h6>
               </div>
               <div class="ms-md-auto py-2 py-md-0">
                 <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
@@ -500,11 +512,71 @@
                           <i class="fas fa-users"></i>
                         </div>
                       </div>
-                      <div class="col col-stats ms-3 ms-sm-0">
+                      <div class="col col-stats ms-3 ms-sm-0 clickable-stats" data-bs-toggle="modal" data-bs-target="#visitorStatsModal">
                         <div class="numbers">
                           <p class="card-category">Visitors</p>
-                          <h4 class="card-title">1,294</h4>
+                          <h4 class="card-title">{{total_visits}}</h4>
                         </div>
+
+                        <!-- Button trigger modal -->
+                        <div class="modal fade" id="visitorStatsModal" tabindex="-1" aria-labelledby="visitorStatsModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="visitorStatsModalLabel">Detailed Visitor Statistics</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="row">
+                                  <div class="col-md-6 mb-4">
+                                    <div class="card stat-card">
+                                      <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">Total Visits</h6>
+                                        <h2 class="card-title">{{ total_visits }}</h2>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6 mb-4">
+                                    <div class="card stat-card">
+                                      <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">Today's Visits</h6>
+                                        <h2 class="card-title">{{ today_visits }}</h2>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                
+                                <h5 class="mt-4 mb-3">Recent Visitors</h5>
+                                <div class="table-responsive">
+                                  <table class="table table-hover">
+                                    <thead>
+                                      <tr>
+                                        <th>Visit Time</th>
+                                        <th>Visits</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {% for visit in recent_visits %}
+                                      <tr>
+                                        <td>{{ visit.visit_time|date:"M d, Y H:i" }}</td>
+                                        <td>{{ visit.visit_count }}</td>
+                                      </tr>
+                                      {% empty %}
+                                      <tr>
+                                        <td colspan="2">No visits recorded yet</td>
+                                      </tr>
+                                      {% endfor %}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
                       </div>
                     </div>
                   </div>
@@ -545,7 +617,7 @@
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
                           <p class="card-category">Sales</p>
-                          <h4 class="card-title">$ 1,345</h4>
+                          <h4 class="card-title">  1,345</h4>
                         </div>
                       </div>
                     </div>
@@ -641,7 +713,7 @@
                   </div>
                   <div class="card-body pb-0">
                     <div class="mb-4 mt-2">
-                      <h1>$4,578.58</h1>
+                      <h1> 4,578.58</h1>
                     </div>
                     <div class="pull-in">
                       <canvas id="dailySalesChart"></canvas>
@@ -864,7 +936,7 @@
                               Payment from #10231
                             </th>
                             <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                            <td class="text-end">$250.00</td>
+                            <td class="text-end">250.00</td>
                             <td class="text-end">
                               <span class="badge badge-success">Completed</span>
                             </td>
@@ -879,7 +951,7 @@
                               Payment from #10231
                             </th>
                             <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                            <td class="text-end">$250.00</td>
+                            <td class="text-end">250.00</td>
                             <td class="text-end">
                               <span class="badge badge-success">Completed</span>
                             </td>
@@ -894,7 +966,7 @@
                               Payment from #10231
                             </th>
                             <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                            <td class="text-end">$250.00</td>
+                            <td class="text-end">250.00</td>
                             <td class="text-end">
                               <span class="badge badge-success">Completed</span>
                             </td>
@@ -909,7 +981,7 @@
                               Payment from #10231
                             </th>
                             <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                            <td class="text-end">$250.00</td>
+                            <td class="text-end">250.00</td>
                             <td class="text-end">
                               <span class="badge badge-success">Completed</span>
                             </td>
@@ -924,7 +996,7 @@
                               Payment from #10231
                             </th>
                             <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                            <td class="text-end">$250.00</td>
+                            <td class="text-end">250.00</td>
                             <td class="text-end">
                               <span class="badge badge-success">Completed</span>
                             </td>
@@ -939,7 +1011,7 @@
                               Payment from #10231
                             </th>
                             <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                            <td class="text-end">$250.00</td>
+                            <td class="text-end">250.00</td>
                             <td class="text-end">
                               <span class="badge badge-success">Completed</span>
                             </td>
@@ -954,7 +1026,7 @@
                               Payment from #10231
                             </th>
                             <td class="text-end">Mar 19, 2020, 2.45pm</td>
-                            <td class="text-end">$250.00</td>
+                            <td class="text-end"> 250.00</td>
                             <td class="text-end">
                               <span class="badge badge-success">Completed</span>
                             </td>
@@ -970,35 +1042,15 @@
         </div>
 
         <footer class="footer">
-          <div class="container-fluid d-flex justify-content-between">
-            <nav class="pull-left">
-              <ul class="nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="http://www.themekita.com">
-                    ThemeKita
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#"> Help </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#"> Licenses </a>
-                </li>
-              </ul>
-            </nav>
-            <div class="copyright">
-              2024, made with <i class="fa fa-heart heart text-danger"></i> by
-              <a href="http://www.themekita.com">ThemeKita</a>
-            </div>
-            <div>
-              Distributed by
-              <a target="_blank" href="https://themewagon.com/">ThemeWagon</a>.
-            </div>
+          
           </div>
         </footer>
       </div>
 
+      
+
       <!-- Custom template | don't include it in your project! -->
+       <!--
       <div class="custom-template">
         <div class="title">Settings</div>
         <div class="custom-content">
@@ -1191,8 +1243,11 @@
           <i class="icon-settings"></i>
         </div>
       </div>
+
+    -->
+
       <!-- End Custom template -->
-    </div>
+]     </div>
     <!--   Core JS Files   -->
     <script src="../../../static/assets/js/core/jquery-3.7.1.min.js"></script>
     <script src="../../../static/assets/js/core/popper.min.js"></script>
@@ -1230,7 +1285,7 @@
     <script src="../../../static/assets/js/setting-demo.js"></script>
     <script src="../../../static/assets/js/demo.js"></script>
     <script>
-      $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+       ("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
         type: "line",
         height: "70",
         width: "100%",
@@ -1239,7 +1294,7 @@
         fillColor: "rgba(23, 125, 255, 0.14)",
       });
 
-      $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+       ("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
         type: "line",
         height: "70",
         width: "100%",
@@ -1248,7 +1303,7 @@
         fillColor: "rgba(243, 84, 93, .14)",
       });
 
-      $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+       ("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
         type: "line",
         height: "70",
         width: "100%",
