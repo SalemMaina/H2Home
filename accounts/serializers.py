@@ -21,11 +21,8 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
         model = CustomerProfile
         fields = ['url', 'user', 'name', 'location' ,'contact_number'] 
 
-<<<<<<< HEAD
-=======
 class VendorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Vendor
         fields = ['url', 'user', 'business_name', 'opening_time', 'closing_time', 'location', 'description', 'price_per_litre', 'email', 'phone_number']
         
->>>>>>> 277beb3 (REST Api updates)

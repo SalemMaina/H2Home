@@ -1,5 +1,4 @@
 from django.shortcuts import render
-<<<<<<< HEAD
 from django.contrib.auth.models import Group, User
 
 from Vendors.models import Vendor
@@ -10,8 +9,7 @@ from rest_framework import status
 
 
 from rest_framework.views import APIView
-from .serializers import GroupSerializer, UserSerializer, ProfileSerializer
-=======
+from .serializers import UserSerializer, ProfileSerializer
 from django.contrib.auth.models import User
 from .models import CustomerProfile
 from rest_framework import permissions, viewsets
@@ -21,7 +19,6 @@ from rest_framework import status
 
 from .serializers import UserSerializer, ProfileSerializer, VendorSerializer
 from Vendors.models import Vendor
->>>>>>> 277beb3 (REST Api updates)
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -32,14 +29,11 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     #permission_classes = [permissions.IsAuthenticated]
 
-<<<<<<< HEAD
-=======
 @api_view(['POST'])
 def perform_create(self, serializer):
         email = serializer.validated_data.get("email", "")
         username = email.split('@')[0]  # Extract first part of email
         serializer.save(username=username)
->>>>>>> 277beb3 (REST Api updates)
 
 #class GroupViewSet(viewsets.ModelViewSet):
    
@@ -51,8 +45,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
     queryset = CustomerProfile.objects.all()
     serializer_class = ProfileSerializer
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     permission_classes =[permissions.IsAuthenticated]
 
 class VendorCustomersView(APIView):
@@ -86,11 +79,9 @@ class ChangeCustomerVendorView(APIView):
 
         except Vendor.DoesNotExist:
             return Response({"error": "Vendor not found"}, status=status.HTTP_404_NOT_FOUND)
-=======
+
     permission_classes = [permissions.IsAuthenticated]
-=======
     #permission_classes = [permissions.IsAuthenticated]
->>>>>>> f026378 (Payments module in the backend)
 
 @api_view(['POST'])
 def create_profile(request):
@@ -165,4 +156,3 @@ def vendor_detail(request,pk):
         if request.method=='DELETE':
             vendor.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
->>>>>>> 277beb3 (REST Api updates)

@@ -69,7 +69,6 @@ INSTALLED_APPS = [
     'IOT',
     'Vendors',
     'tracking',
-<<<<<<< HEAD
     'Device',
     'Payments',
 
